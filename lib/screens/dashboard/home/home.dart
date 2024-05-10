@@ -7,6 +7,8 @@ import 'package:leafy_guardian/screens/dashboard/home/widgets/garden_ui.dart';
 import 'package:leafy_guardian/utils/routes/index.dart';
 import 'package:provider/provider.dart';
 
+import 'widgets/common_ui_components.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -122,8 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                   ),
-                  ElevatedButton(
-                      onPressed: () {}, child: const Text('Add Plants')),
+                  addPlants(),
                   const SizedBox(
                     height: 20,
                   )

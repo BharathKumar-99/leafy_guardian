@@ -9,5 +9,6 @@ class RoutesConstants {
   String profile = '/profileScreen';
   String plantDetails = 'plantDetails';
   String allPlants = '/allPlants';
+  String addPlants = '/addPlants';
 
 }

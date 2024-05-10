@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:leafy_guardian/provider/home_provider.dart'; 
+import 'package:leafy_guardian/provider/home_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../dashboard/home/widgets/common_ui_components.dart';
 import '../dashboard/home/widgets/garden_list_ui.dart';
 
 class AllPlantsScreen extends StatefulWidget {
@@ -17,7 +18,14 @@ class _AllPlantsScreenState extends State<AllPlantsScreen> {
     return Consumer<HomeProvider>(builder: (context, data, widget) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('All plants'),
+          title: const Text('All Plants'),
+          centerTitle: true,
+          actions: [
+            Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                child: addPlants())
+          ],
         ),
         body: ListView.builder(
             itemCount: data.garden.length,

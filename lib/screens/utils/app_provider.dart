@@ -20,6 +20,7 @@ class AppProviders {
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
         //for home
         ChangeNotifierProvider(create: (_) => HomeProvider()),
+        //for plants
       ],
       //running the app
       child: const App(),

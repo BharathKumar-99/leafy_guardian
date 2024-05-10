@@ -13,7 +13,13 @@ class ImageConstants {
   static const String personActive = 'assets/icons/person_active.png';
   static const String calenderActive = 'assets/icons/calender_active.png';
   static const String calenderinActive = 'assets/icons/calender_inactive.png';
+  static const String plant = 'assets/icons/plant.png';
   static const String temp = 'assets/icons/temp.png';
   static const String humidity = 'assets/icons/humidity.png';
   static const String soil = 'assets/icons/soil.png';
+  static const String loading = 'assets/loading.json';
+  static const String error = 'assets/error.json';
+  static const String waterPlant = 'assets/waterplant.json';
+  static const String addPlantLoading = 'assets/add_plant_loading.json';
+  static const String addPlant = 'assets/icons/add_plant.png';
 }

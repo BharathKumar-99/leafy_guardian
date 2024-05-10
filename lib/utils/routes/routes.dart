@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:leafy_guardian/screens/AddPlant/add_plant.dart';
 import 'package:leafy_guardian/screens/Auth/auth_screen.dart';
 import 'package:leafy_guardian/screens/Auth/forgot_password/forgot_password.dart';
 import 'package:leafy_guardian/screens/Auth/login/login.dart';
@@ -110,6 +111,10 @@ class AppRoutes {
               builder: (context, state) => const ProfileScreen(),
             ),
           ],
+        ),
+        GoRoute(
+          path: _routeName.addPlants,
+          builder: (context, state) => const AddPlants(),
         ),
       ]);
 }
