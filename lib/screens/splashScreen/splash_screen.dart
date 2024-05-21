@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:leafy_guardian/constants/image_constants.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   late SplashScreenProvider splashScreenProvider;
-  AssetImage assetImageSplash = const AssetImage(ImageConstants.splashScreen);
+  AssetImage assetImageBG = const AssetImage(ImageConstants.splashFarmer);
   AssetImage assetImageLogo = const AssetImage(ImageConstants.logoWhite);
 
   @override
@@ -26,30 +27,23 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    //precaching images to make splash screen faster
-    precacheImage(assetImageSplash, context);
-    precacheImage(assetImageLogo, context);
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(fit: BoxFit.fill, image: assetImageSplash),
-      ),
+      decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Hero(
-                tag: "logo",
-                child: Image(
-                  image: assetImageLogo,
-                )),
-          )
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Image(image: assetImageLogo),
+            ),
+          ).animate().slideY(begin: 0.0, end: 1.0, duration: 1500.ms),
+          const Spacer(),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Image(image: assetImageBG),
+          ).animate().slideY(begin: 1.0, end: 0.0, duration: 1500.ms),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const lightColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF7FD8AB), // Washed-out version of primary color
+  primary: Color(0xFF8BC34A), // Washed-out version of primary color
   onPrimary: Color(0xFFFFFFFF), // Keep white unchanged
   primaryContainer:
       Color(0xFFD5FBD9), // Washed-out version of primary container color
@@ -36,7 +36,7 @@ const lightColorScheme = ColorScheme(
   inversePrimary:
       Color(0xFFA3E2B2), // Washed-out version of inversePrimary color
   shadow: Color(0xFF7F7F7F), // Washed-out version of shadow color
-  surfaceTint: Color(0xFF7FD8AB), // Washed-out version of surfaceTint color
+  surfaceTint: Color(0xFF8BC34A), // Washed-out version of surfaceTint color
   outlineVariant:
       Color(0xFFD5DBD3), // Washed-out version of outlineVariant color
   scrim: Color(0x80000000), // Adjusted opacity to make it washed-out
@@ -57,7 +57,7 @@ ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
 
 const darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
-  primary: Color(0xFF7CDA9B),
+  primary: Color(0xFF8BC34A),
   onPrimary: Color(0xFF00391C),
   primaryContainer: Color(0xFF00522C),
   onPrimaryContainer: Color(0xFF98F7B6),

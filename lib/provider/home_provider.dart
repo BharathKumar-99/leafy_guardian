@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:leafy_guardian/api/home_api.dart';
 import 'package:leafy_guardian/model/didyouknow_model.dart';
 import 'package:leafy_guardian/model/user_model.dart';
+import 'package:leafy_guardian/model/weather_model.dart';
 
 import '../model/garden_model.dart';
 import '../utils/supabase/supabase.dart';
@@ -11,7 +13,11 @@ class HomeProvider extends ChangeNotifier {
   String? profilePic;
   final HomeApi _homeApi = HomeApi();
   UserModel? userModel;
+  WeatherModel? weather = WeatherModel();
+  String? weatherString;
+  num? weatherTemp;
   List<DidYouKnowModel> didYouKnowModel = [];
+  List<Placemark> placemarks = [];
 
   //to get time of day based on current time
   get timeOfday => DateTime.now().hour < 12
@@ -33,6 +39,15 @@ class HomeProvider extends ChangeNotifier {
       }
       notifyListeners();
     });
+    weather = await _homeApi.getWeather();
+    await _homeApi
+        .fetchWetherData(weather!.current!.weather![0].toJson().toString())
+        .then((value) {
+      weatherString = value;
+      weatherTemp = weather!.current!.feelsLike;
+    });
+    placemarks = await placemarkFromCoordinates(
+        weather!.lat!.toDouble(), weather!.lon!.toDouble());
 
     notifyListeners();
   }

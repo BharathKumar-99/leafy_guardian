@@ -5,9 +5,12 @@ import 'package:leafy_guardian/provider/home_provider.dart';
 import 'package:leafy_guardian/screens/dashboard/home/widgets/did_you_know.dart';
 import 'package:leafy_guardian/screens/dashboard/home/widgets/garden_ui.dart';
 import 'package:leafy_guardian/utils/routes/index.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
+import '../../../constants/image_constants.dart';
 import 'widgets/common_ui_components.dart';
+import 'widgets/weather_ui.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -67,6 +70,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  data.weatherString == null
+                      ? Center(
+                          child:
+                              LottieBuilder.asset(ImageConstants.weatherLoader),
+                        )
+                      : WetherCardUi(
+                          title: data.weatherString,
+                          degree: data.weatherTemp,
+                          city: data.placemarks.first.subLocality ?? '',
+                        ),
                   const SizedBox(
                     height: 20,
                   ),

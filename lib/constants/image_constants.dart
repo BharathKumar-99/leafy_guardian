@@ -2,6 +2,7 @@ class ImageConstants {
   static const String splashScreen = 'assets/splash_screen.jpg';
   static const String logo = 'assets/logo.png';
   static const String logoWhite = 'assets/logo_white.png';
+  static const String splashFarmer = 'assets/splashFarmer.jpg';
 
   //Icons
   static const String emailIcon = 'assets/icons/email.png';
@@ -21,5 +22,12 @@ class ImageConstants {
   static const String error = 'assets/error.json';
   static const String waterPlant = 'assets/waterplant.json';
   static const String addPlantLoading = 'assets/add_plant_loading.json';
+  static const String weatherLoader = 'assets/weatherLoader.json';
   static const String addPlant = 'assets/icons/add_plant.png';
+
+//weather
+  static const String sunnyWeather = 'assets/icons/sunny.png';
+  static const String rainnyWeather = 'assets/icons/rainny.png';
+  static const String cloudyWeather = 'assets/icons/cloudy.png';
+  static const String sunnynightWeather = 'assets/icons/sunny_night.png';
 }
