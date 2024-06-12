@@ -8,11 +8,6 @@ class DashboardArray {
       'inactive': ImageConstants.homeIncactive
     },
     {
-      'title': "Calender",
-      'icon': ImageConstants.calenderActive,
-      'inactive': ImageConstants.calenderinActive
-    },
-    {
       'title': "Profile",
       'icon': ImageConstants.personActive,
       'inactive': ImageConstants.personInActive

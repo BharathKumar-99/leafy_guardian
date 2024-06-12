@@ -13,10 +13,8 @@ class DashboardProvider extends ChangeNotifier {
       case 0:
         path = routeName.home;
         break;
+
       case 1:
-        path = routeName.calender;
-        break;
-      case 2:
         path = routeName.profile;
         break;
     }

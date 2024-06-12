@@ -19,13 +19,14 @@ class GardenModel {
       this.soil,
       this.image,
       this.description,
-      this.id,this.soilPh,
+      this.id,
+      this.soilPh,
       this.potNo});
 
   GardenModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    temp = json['temp'];
+    temp = json['temperature'];
     humidity = json['humidity'];
     soil = json['soil'];
     image = json['image'];
@@ -41,7 +42,7 @@ class GardenModel {
     data['id'] = id;
     data['name'] = name;
     data['temp'] = temp;
-    data['humidity'] = humidity;
+    data['temperature'] = humidity;
     data['soil'] = soil;
     data['image'] = image;
     data['soil_ph'] = soilPh;

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:leafy_guardian/provider/home_provider.dart';
+import 'package:leafy_guardian/screens/dashboard/home/widgets/carasole_plant_ui.dart';
 import 'package:leafy_guardian/screens/dashboard/home/widgets/did_you_know.dart';
-import 'package:leafy_guardian/screens/dashboard/home/widgets/garden_ui.dart';
 import 'package:leafy_guardian/utils/routes/index.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-
 import '../../../constants/image_constants.dart';
 import 'widgets/common_ui_components.dart';
 import 'widgets/weather_ui.dart';
@@ -118,27 +116,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.35,
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount:
-                            data.garden.length > 3 ? 3 : data.garden.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          var gardenModel = data.garden[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 5),
-                            child: gardenUi(
-                                gardenModel.image ?? "",
-                                gardenModel.name ?? "",
-                                gardenModel.temp ?? 0.0,
-                                gardenModel.soil ?? "",
-                                gardenModel.humidity ?? 0,
-                                gardenModel.id.toString()),
-                          );
-                        }),
+                  if (data.garden.isNotEmpty)
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.35,
+                      width: double.infinity,
+                      child: getCarasoleUi(data),
+                    ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   addPlants(),
                   const SizedBox(

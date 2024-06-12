@@ -90,8 +90,7 @@ class _DetectionUiState extends State<DetectionUi> {
                 final image = await controller!.takePicture();
                 widget.provider.detectPlant(File(image.path));
               } catch (e) {
-                // If an error occurs, log the error to the console.
-                print(e);
+                debugPrint(e.toString());
               }
             },
             child: const CircleAvatar(

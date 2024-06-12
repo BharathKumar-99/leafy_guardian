@@ -14,7 +14,7 @@ gardenListUi(String image, String name, num temp, String soilPh, num humidity,
         },
         child: Container(
           padding: const EdgeInsets.all(10),
-          height: MediaQuery.of(context).size.height * 0.2,
+          height: MediaQuery.of(context).size.height * 0.25,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(20),
@@ -41,10 +41,17 @@ gardenListUi(String image, String name, num temp, String soilPh, num humidity,
                               ),
                             ),
                           ),
-                          Text(
-                            description,
-                            maxLines: 5,
-                            overflow: TextOverflow.fade,
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                                color: Colors.grey.shade200.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Text(
+                              description,
+                              maxLines: 5,
+                              overflow: TextOverflow.fade,
+                              style: Theme.of(context).textTheme.labelLarge,
+                            ),
                           ),
                         ],
                       )),

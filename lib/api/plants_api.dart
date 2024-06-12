@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:leafy_guardian/constants/constants.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:leafy_guardian/model/garden_model.dart';
@@ -30,12 +31,11 @@ class PlantsApi {
   insertPlantDetails(String model, int id) async {
     PlantsDetailModel data = PlantsDetailModel.fromRawJson(model);
     try {
-      var datares = await SupaFlow.client
+      await SupaFlow.client
           .from('plants')
           .update({"description": data.toJson()}).match({"id": id}).select();
-      print(datares);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -79,7 +79,7 @@ class PlantsApi {
 
       return plantRecognitionModel;
     } catch (error) {
-      print('Error: $error');
+      debugPrint('Error: $error');
     }
   }
 
@@ -115,5 +115,13 @@ class PlantsApi {
     Random random = Random();
     return List.generate(length, (_) => charset[random.nextInt(charset.length)])
         .join();
+  }
+
+  updateWaterValue() async {
+    await SupaFlow.client
+        .from('plants')
+        .update({'value': 1})
+        .eq('id', 1004)
+        .select();
   }
 }

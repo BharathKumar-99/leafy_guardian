@@ -37,6 +37,7 @@ class HomeProvider extends ChangeNotifier {
       for (var item in data) {
         garden.add(GardenModel.fromJson(item));
       }
+      garden.removeWhere((element) => element.image == null);
       notifyListeners();
     });
     weather = await _homeApi.getWeather();

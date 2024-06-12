@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:leafy_guardian/constants/constants.dart';
 import 'package:leafy_guardian/model/garden_model.dart';
 import 'package:leafy_guardian/model/user_model.dart';
 import 'package:leafy_guardian/model/weather_model.dart';
 import 'package:leafy_guardian/utils/supabase/supabase.dart';
-import 'package:location/location.dart'; 
+import 'package:location/location.dart';
 import '../model/didyouknow_model.dart';
 
 class HomeApi {
@@ -71,7 +72,6 @@ class HomeApi {
     }
 
     locationData = await location.getLocation();
-    print(locationData);
     Dio dio = Dio();
     String apiKey = Constansts().weatherApi;
     String url =
@@ -95,7 +95,7 @@ class HomeApi {
       });
       return weatherModel;
     } catch (error) {
-      print('Error: $error');
+      debugPrint('Error: $error');
     }
   }
 
