@@ -15,6 +15,7 @@ class HomeProvider extends ChangeNotifier {
   UserModel? userModel;
   WeatherModel? weather = WeatherModel();
   String? weatherString;
+  bool weatherError = false;
   num? weatherTemp;
   List<DidYouKnowModel> didYouKnowModel = [];
   List<Placemark> placemarks = [];
@@ -40,15 +41,20 @@ class HomeProvider extends ChangeNotifier {
       garden.removeWhere((element) => element.image == null);
       notifyListeners();
     });
-    weather = await _homeApi.getWeather();
-    await _homeApi
-        .fetchWetherData(weather!.current!.weather![0].toJson().toString())
-        .then((value) {
-      weatherString = value;
-      weatherTemp = weather!.current!.feelsLike;
-    });
-    placemarks = await placemarkFromCoordinates(
-        weather!.lat!.toDouble(), weather!.lon!.toDouble());
+    try {
+      weather = await _homeApi.getWeather();
+      await _homeApi
+          .fetchWetherData(weather!.current!.weather![0].toJson().toString())
+          .then((value) {
+        weatherString = value;
+        weatherTemp = weather!.current!.feelsLike;
+      });
+
+      placemarks = await placemarkFromCoordinates(
+          weather!.lat!.toDouble(), weather!.lon!.toDouble());
+    } catch (e) {
+      weatherError = true;
+    }
 
     notifyListeners();
   }

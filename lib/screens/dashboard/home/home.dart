@@ -71,16 +71,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 20,
                   ),
-                  data.weatherString == null
-                      ? Center(
-                          child:
-                              LottieBuilder.asset(ImageConstants.weatherLoader),
+                  data.weatherError
+                      ? Text(
+                          'Something went wrong.',
+                          style: Theme.of(context).textTheme.headlineSmall,
                         )
-                      : WetherCardUi(
-                          title: data.weatherString,
-                          degree: data.weatherTemp,
-                          city: data.placemarks.first.subLocality ?? '',
-                        ),
+                      : data.weatherString == null
+                          ? Center(
+                              child: LottieBuilder.asset(
+                                  ImageConstants.weatherLoader),
+                            )
+                          : WetherCardUi(
+                              title: data.weatherString,
+                              degree: data.weatherTemp,
+                              city: data.placemarks.first.subLocality ?? '',
+                            ),
                   const SizedBox(
                     height: 20,
                   ),
