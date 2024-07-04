@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:leafy_guardian/constants/constants.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:leafy_guardian/model/ask_gaurdian.dart';
 import 'package:leafy_guardian/model/garden_model.dart';
 import 'package:leafy_guardian/model/plant_details_model.dart';
 import 'package:leafy_guardian/model/plant_recognition_model.dart';
@@ -25,6 +26,22 @@ class PlantsApi {
           .then((value) => insertPlantDetails(value.text ?? "", id));
     } catch (e) {
       return "error";
+    }
+  }
+
+  Future<AskGaurdianModel> askGaurdian(String query, String plantName) async {
+    final model =
+        GenerativeModel(model: 'gemini-pro', apiKey: Constansts().googleaPIkEY);
+
+    String prompt =
+        'Imagine yourself as Gaurdian and help me with the query $query about $plantName in the following format {"question": "question","issue": [{"title": "title","description": "description"}],"causes":[{"title": "title","description": "description"}],"symptoms": [{"title": "title","description": "description"}],"treatment": [{"title": "title","description": "description"}],"tips": [{"title": "title","description": "description"}] } and dont include ```json``` in the answer and only give the json and nothing else';
+    final content = [Content.text(prompt)];
+    try {
+      return await model
+          .generateContent(content)
+          .then((value) => AskGaurdianModel.fromRawJson(value.text ?? ""));
+    } catch (e) {
+      return AskGaurdianModel(error: "Something went wrong");
     }
   }
 
@@ -123,5 +140,22 @@ class PlantsApi {
         .update({'value': 1})
         .eq('id', 1004)
         .select();
+  }
+
+  Future<GardenModel> isWateringDone(int id) async {
+    return await SupaFlow.client
+        .from('plants')
+        .select('*')
+        .eq('id', id)
+        .single()
+        .then((value) {
+      return GardenModel.fromJson(value);
+    });
+  }
+
+  Future<void> updateLastWatering(int id) async {
+    await SupaFlow.client
+        .from('plants')
+        .update({'last_watered': DateTime.now().toString()}).eq('id', id);
   }
 }

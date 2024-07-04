@@ -31,8 +31,7 @@ dependencies:
   geocoding: ^3.0.0
   carousel_slider: ^4.2.1
   image: ^4.2.0
-  path_provider:
-  background_remover: ^0.0.3
+  path_provider:  
   
 
 

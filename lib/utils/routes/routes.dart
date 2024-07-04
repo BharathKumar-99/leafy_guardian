@@ -5,6 +5,7 @@ import 'package:leafy_guardian/screens/dashboard/calender/calender.dart';
 import 'package:leafy_guardian/screens/dashboard/home/home.dart';
 import 'package:leafy_guardian/screens/dashboard/person/person.dart';
 import 'package:leafy_guardian/screens/details/all_plants.dart';
+import 'package:leafy_guardian/screens/details/ask_gardian.dart';
 import 'package:leafy_guardian/screens/details/plants_details.dart';
 
 import '../../screens/dashboard/dashboard.dart';
@@ -66,6 +67,12 @@ class AppRoutes {
             GoRoute(
               path: _routeName.profile,
               builder: (context, state) => const ProfileScreen(),
+            ),
+            GoRoute(
+              path: _routeName.askGaurduian,
+              builder: (context, state) => AskGuardianScreen(
+                plantName: state.extra as String,
+              ),
             ),
           ],
         ),

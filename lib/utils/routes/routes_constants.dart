@@ -10,5 +10,6 @@ class RoutesConstants {
   String plantDetails = 'plantDetails';
   String allPlants = '/allPlants';
   String addPlants = '/addPlants';
+  String askGaurduian  = '/askGuardian';
 
 }

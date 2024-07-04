@@ -11,6 +11,7 @@ class GardenModel {
   String? image;
   PlantsDetailModel? description;
   int? potNo;
+  DateTime? lastWatering;
 
   GardenModel(
       {this.name,
@@ -21,6 +22,7 @@ class GardenModel {
       this.description,
       this.id,
       this.soilPh,
+      this.lastWatering,
       this.potNo});
 
   GardenModel.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,10 @@ class GardenModel {
         ? PlantsDetailModel.fromJson(json['description'])
         : null;
     potNo = json['potNo'];
+
+    lastWatering = json['last_watered'] != null
+        ? DateTime.parse(json['last_watered'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -50,6 +56,7 @@ class GardenModel {
       data['description'] = description!.toJson();
     }
     data['potNo'] = potNo;
+    data['last_watered'] = lastWatering.toString();
     return data;
   }
 }

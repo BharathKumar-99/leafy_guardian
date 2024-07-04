@@ -1,7 +1,10 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:leafy_guardian/api/home_api.dart';
 import 'package:leafy_guardian/api/plants_api.dart';
 import 'package:leafy_guardian/model/garden_model.dart';
+import 'package:leafy_guardian/utils/routes/routes_constants.dart';
 import 'package:lottie/lottie.dart';
 import '../../constants/image_constants.dart';
 
@@ -256,27 +259,75 @@ class _PlantsDetailsState extends State<PlantsDetails> {
                             color: const Color.fromARGB(64, 58, 58, 58),
                             height: MediaQuery.of(context).size.height,
                             width: MediaQuery.of(context).size.width,
-                            child: Lottie.asset(ImageConstants.afterwaterPlant))
+                            child: Lottie.asset(ImageConstants.wateringPlant))
                     ],
                   ),
                 ),
-      floatingActionButton: SizedBox(
-        height: 80,
-        child: ElevatedButton(
-          onPressed: () async {
-            setState(() {
-              watering = true;
-            });
-            await PlantsApi().updateWaterValue();
-            Future.delayed(const Duration(seconds: 7), () {
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(
+              onPressed: () {
+                context.push(RoutesConstants().askGaurduian,
+                    extra: gardenModel?.name);
+              },
+              icon: Icon(
+                Icons.add,
+                color: Theme.of(context).colorScheme.primary,
+              )),
+          FloatingActionButton(
+            onPressed: () async {
+              GardenModel? wateringData =
+                  await PlantsApi().isWateringDone(gardenModel!.id ?? 0);
+              if (wateringData.lastWatering != null) {
+                if (areDatesSame(wateringData.lastWatering!, DateTime.now())) {
+                  final snackBar = SnackBar(
+                    elevation: 0,
+                    behavior: SnackBarBehavior.floating,
+                    backgroundColor: Colors.transparent,
+                    clipBehavior: Clip.none,
+                    content: AwesomeSnackbarContent(
+                      title: 'Information',
+                      message: 'Already Watered Today',
+                      inMaterialBanner: true,
+                      contentType: ContentType.warning,
+                    ),
+                  );
+
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(snackBar);
+                  return;
+                } else {
+                  await PlantsApi().updateLastWatering(gardenModel!.id ?? 0);
+                }
+              } else {
+                await PlantsApi().updateLastWatering(gardenModel!.id ?? 0);
+              }
+
               setState(() {
-                watering = false;
+                watering = true;
               });
-            });
-          },
-          child: Text(watering ? 'Watering' : 'Water Plant'),
-        ),
+              await PlantsApi().updateWaterValue();
+              Future.delayed(const Duration(seconds: 7), () {
+                setState(() {
+                  watering = false;
+                });
+              });
+            },
+            child: Icon(
+              Icons.water_drop,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+        ],
       ),
     );
+  }
+
+  bool areDatesSame(DateTime date1, DateTime date2) {
+    return date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
   }
 }

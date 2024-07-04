@@ -22,6 +22,8 @@ class ImageConstants {
   static const String error = 'assets/error.json';
   static const String waterPlant = 'assets/waterplant.json';
   static const String afterwaterPlant = 'assets/watering.json';
+  static const String wateringPlant = 'assets/wateringPlant.json';
+  static const String loadingAi = 'assets/thinking.json';
   static const String addPlantLoading = 'assets/add_plant_loading.json';
   static const String weatherLoader = 'assets/weatherLoader.json';
   static const String addPlant = 'assets/icons/add_plant.png';
