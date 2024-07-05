@@ -128,12 +128,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(50),
-              child: Lottie.asset(ImageConstants.waterPlant)),
-        ),
       );
     });
   }
